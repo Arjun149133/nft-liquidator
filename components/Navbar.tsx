@@ -29,7 +29,7 @@ export default function Navbar() {
                 : " bg-gray-700 px-2 rounded-md"
             }`}
           >
-            <Link href="/nft">NFT's</Link>
+            <Link href="/nft">NFT</Link>
           </div>
         </div>
       </div>
