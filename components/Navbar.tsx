@@ -1,11 +1,17 @@
 "use client";
 import { usePathname } from "next/navigation";
 import { Button } from "./ui/button";
-import { Tabs, TabsTrigger, TabsList, TabsContent } from "./ui/tabs";
 import Link from "next/link";
+import {
+  WalletModalProvider,
+  WalletDisconnectButton,
+  WalletMultiButton,
+} from "@solana/wallet-adapter-react-ui";
+import { useWallet } from "@solana/wallet-adapter-react";
 
 export default function Navbar() {
   const pathname = usePathname();
+  const wallet = useWallet();
   return (
     <nav className=" flex justify-between p-4 bg-black text-white">
       <div className=" flex justify-center items-center">
@@ -34,12 +40,11 @@ export default function Navbar() {
         </div>
       </div>
       <div>
-        <Button
-          variant={"secondary"}
-          className=" bg-gradient-to-r from-green-500 to-green-400"
-        >
-          Connect Wallet
-        </Button>
+        {wallet.publicKey?.toString() ? (
+          <WalletDisconnectButton />
+        ) : (
+          <WalletMultiButton />
+        )}
       </div>
     </nav>
   );
